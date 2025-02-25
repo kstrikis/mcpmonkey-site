@@ -10,7 +10,35 @@ sidebar_position: 1
 
 MCPMonkey is a fork of Violentmonkey that adds support for MCP (Model Context Protocol) servers. This allows AI language models like Claude to interact with your browser in meaningful ways.
 
-### Key Features
+## Quick Install Guide
+
+MCPMonkey consists of three components that you need to install:
+
+### 1. Configure Cursor to Use MCPMonkey
+
+1. Open Cursor (v0.45.7+) and go to Settings > Features > MCP Servers
+2. Add a new MCP server:
+   - Name: MCPMonkey
+   - Type: command
+   - Command: `npx mcpmonkey-server`
+3. Save your settings
+
+### 2. Install the Firefox Extension
+
+1. Download the .xpi file from [GitHub Releases](https://github.com/kstrikis/MCPMonkey/releases/download/v0.4.0/MCPMonkey-0.4.0.xpi)
+2. In Firefox, go to Add-ons and Themes (about:addons)
+3. Click the gear icon and select "Install Add-on From File..."
+4. Select the downloaded .xpi file and follow the prompts
+
+### 3. Install the Page Styles Userscript
+
+1. After installing the extension, click this link: [getPageStyles.user.js](https://github.com/kstrikis/MCPMonkey/releases/download/v0.4.0/getPageStyles.user.js)
+2. The MCPMonkey extension will show an install dialog
+3. Click "Install" to add the userscript
+
+For advanced installation options including building from source, see the [Installation and Development Guide](/docs/installation-and-development) page.
+
+## Key Features
 
 * **MCP Server Integration**: Connect AI tools to your browser through a standardized MCP interface
 * **Tab Management**: Programmatic control of browser tabs (create, close, activate, duplicate)
@@ -18,61 +46,12 @@ MCPMonkey is a fork of Violentmonkey that adds support for MCP (Model Context Pr
 * **User Script Support**: Full compatibility with existing userscripts
 * **Cursor Integration**: Full support for Cursor's MCP integration (v0.45.7+)
 
-### Planned Features (Not Yet Implemented)
+## Planned Features (Not Yet Implemented)
 
 * **Enhanced Browser Access**: Access to browsing history, bookmarks, and more
 * **Permissions Control**: Fine-grained control over what resources each MCP server can access
 * **MCP Server Management**: Install and manage multiple MCP servers directly from your browser
 * **Community Hub**: Share and discover useful MCP configurations and tools
-
-## Getting Started
-
-### Requirements
-
-1. **Node.js** - Install from [nodejs.org](https://nodejs.org) (needed to run dependencies)
-2. **Firefox Browser** - MCPMonkey is currently available as a Firefox extension
-3. **An AI Tool** - Such as Claude Desktop, Cursor (v0.45.7+), or other AI applications that support MCP
-
-### Installation
-
-MCPMonkey is currently available as a development build that needs to be installed manually:
-
-1. Clone the repository:
-```bash
-git clone https://github.com/kstrikis/mcpmonkey.git
-cd mcpmonkey
-```
-
-2. Install dependencies:
-```bash
-yarn
-```
-
-3. Build the extension:
-```bash
-yarn dev
-```
-
-4. Install in Firefox:
-   - Open Firefox and navigate to `about:debugging`
-   - Click "This Firefox" in the left sidebar
-   - Click "Load Temporary Add-on..."
-   - Navigate to the `dist` folder in your MCPMonkey build directory
-   - Select any file from the `dist` folder to load the extension
-
-## Cursor Integration
-
-If you're using Cursor v0.45.7 or higher, MCPMonkey is supported through Cursor's built-in MCP integration:
-
-1. Install MCPMonkey as described above
-2. Open Cursor and go to Settings > Features > MCP Servers
-3. Configure Cursor to connect to MCPMonkey:
-   - Name: MCPMonkey
-   - Type: command
-   - Command: `npx mcpmonkey-server`
-4. Cursor's AI agent will automatically use MCPMonkey's browser tools when relevant
-
-Note: In Cursor 0.46+, MCP settings are in their own tab and there is support for .cursor/mcp.json configuration files.
 
 ## How It Works
 
@@ -96,7 +75,6 @@ Here are some examples of what you can do with MCPMonkey:
 ## Next Steps
 
 Learn more about:
-* [Configuring MCPMonkey](/docs/configuration)
+* [Installation and Development](/docs/installation-and-development)
 * [MCP Servers](/docs/mcp-servers)
 * [Security and Privacy](/docs/security)
-* [Developing for MCPMonkey](/docs/development)

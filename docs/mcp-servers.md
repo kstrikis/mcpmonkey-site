@@ -54,40 +54,11 @@ This tool extracts styling information from web pages:
 - Assists AI in understanding web page design
 - Uses content script bridge for secure communication
 
-## Using the MCP Server
 
-### With Claude Desktop
-
-1. Edit your Claude Desktop config.json:
-
-```json
-{
-  "mcp": {
-    "servers": [
-      {
-        "name": "MCPMonkey",
-        "command": "npx mcpmonkey-server"
-      }
-    ]
-  }
-}
-```
-
-The config location varies by platform:
-- Mac: `~/Library/Application Support/Claude/config.json`
-- Windows: `%APPDATA%\Claude\config.json`
-
-### With Cursor (v0.45.7+)
-
-1. Open Cursor and go to Settings > Features > MCP Servers
-2. Add MCPMonkey:
-   - Name: MCPMonkey
-   - Type: command
-   - Command: `npx mcpmonkey-server`
 
 Note: In Cursor 0.46+, MCP settings are in their own tab and there is support for .cursor/mcp.json configuration files.
 
-## Custom MCP Servers
+## Custom MCP Tools (Not yet supported)
 
 You can also develop custom MCP servers that extend MCPMonkey's capabilities. Custom servers can be installed and managed through the MCPMonkey dashboard.
 
@@ -98,17 +69,15 @@ You can also develop custom MCP servers that extend MCPMonkey's capabilities. Cu
 - Integrate with other tools and services
 - Provide domain-specific capabilities to AI models
 
-### Developing Custom Servers
+### Developing Custom Servers (Not yet implemented)
 
-To develop a custom MCP server for MCPMonkey:
+To develop a custom MCP tool for MCPMonkey: (Not yet supported)
 
 1. Use the MCPMonkey Server SDK
 2. Define your server's permissions and capabilities
 3. Implement your custom tools following the MCP specification
-4. Package your server as a standard Node.js module
-5. Publish to npm or distribute as a local package
-
-See the [Development](/docs/development) section for detailed documentation on creating custom MCP servers.
+4. Package your server as a .mcp.js file
+5. Publish to our community hub
 
 ## Security Considerations
 
