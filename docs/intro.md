@@ -2,46 +2,101 @@
 sidebar_position: 1
 ---
 
-# Tutorial Intro
+# Introduction to MCPMonkey
 
-Let's discover **Docusaurus in less than 5 minutes**.
+**MCPMonkey** is an MCP server and Firefox extension that enables AI agents to access and interact with your browser.
+
+## What is MCPMonkey?
+
+MCPMonkey is a fork of Violentmonkey that adds support for MCP (Model Context Protocol) servers. This allows AI language models like Claude to interact with your browser in meaningful ways.
+
+### Key Features
+
+* **MCP Server Integration**: Connect AI tools to your browser through a standardized MCP interface
+* **Tab Management**: Programmatic control of browser tabs (create, close, activate, duplicate)
+* **Page Style Extraction**: AI can analyze web page styling information
+* **User Script Support**: Full compatibility with existing userscripts
+* **Cursor Integration**: Full support for Cursor's MCP integration (v0.45.7+)
+
+### Planned Features (Not Yet Implemented)
+
+* **Enhanced Browser Access**: Access to browsing history, bookmarks, and more
+* **Permissions Control**: Fine-grained control over what resources each MCP server can access
+* **MCP Server Management**: Install and manage multiple MCP servers directly from your browser
+* **Community Hub**: Share and discover useful MCP configurations and tools
 
 ## Getting Started
 
-Get started by **creating a new site**.
+### Requirements
 
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
+1. **Node.js** - Install from [nodejs.org](https://nodejs.org) (needed to run dependencies)
+2. **Firefox Browser** - MCPMonkey is currently available as a Firefox extension
+3. **An AI Tool** - Such as Claude Desktop, Cursor (v0.45.7+), or other AI applications that support MCP
 
-### What you'll need
+### Installation
 
-- [Node.js](https://nodejs.org/en/download/) version 18.0 or above:
-  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
+MCPMonkey is currently available as a development build that needs to be installed manually:
 
-## Generate a new site
-
-Generate a new Docusaurus site using the **classic template**.
-
-The classic template will automatically be added to your project after you run the command:
-
+1. Clone the repository:
 ```bash
-npm init docusaurus@latest my-website classic
+git clone https://github.com/kstrikis/mcpmonkey.git
+cd mcpmonkey
 ```
 
-You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
-
-The command also installs all necessary dependencies you need to run Docusaurus.
-
-## Start your site
-
-Run the development server:
-
+2. Install dependencies:
 ```bash
-cd my-website
-npm run start
+yarn
 ```
 
-The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.
+3. Build the extension:
+```bash
+yarn dev
+```
 
-The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
+4. Install in Firefox:
+   - Open Firefox and navigate to `about:debugging`
+   - Click "This Firefox" in the left sidebar
+   - Click "Load Temporary Add-on..."
+   - Navigate to the `dist` folder in your MCPMonkey build directory
+   - Select any file from the `dist` folder to load the extension
 
-Open `docs/intro.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.
+## Cursor Integration
+
+If you're using Cursor v0.45.7 or higher, MCPMonkey is supported through Cursor's built-in MCP integration:
+
+1. Install MCPMonkey as described above
+2. Open Cursor and go to Settings > Features > MCP Servers
+3. Configure Cursor to connect to MCPMonkey:
+   - Name: MCPMonkey
+   - Type: command
+   - Command: `npx mcpmonkey-server`
+4. Cursor's AI agent will automatically use MCPMonkey's browser tools when relevant
+
+Note: In Cursor 0.46+, MCP settings are in their own tab and there is support for .cursor/mcp.json configuration files.
+
+## How It Works
+
+MCPMonkey consists of two main components:
+
+1. **MCP Server**: Communicates with AI tools via stdio and provides MCP tools
+2. **Browser Extension**: Interacts with Firefox and communicates with the MCP server
+
+These components work together through an internal WebSocket connection, allowing the AI tools to interact with your browser through the standardized MCP interface.
+
+## Use Cases
+
+Here are some examples of what you can do with MCPMonkey:
+
+* Let your AI assistant help you manage your browser tabs
+* Allow AI tools to analyze and extract styling information from web pages
+* Give your AI the ability to research topics across multiple tabs
+* Automate browser interactions through natural language commands
+* Efficiently manage browser tabs programmatically through AI
+
+## Next Steps
+
+Learn more about:
+* [Configuring MCPMonkey](/docs/configuration)
+* [MCP Servers](/docs/mcp-servers)
+* [Security and Privacy](/docs/security)
+* [Developing for MCPMonkey](/docs/development)

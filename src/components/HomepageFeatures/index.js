@@ -4,32 +4,32 @@ import styles from './styles.module.css';
 
 const FeatureList = [
   {
-    title: 'Easy to Use',
+    title: 'Browser Extension',
     Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        MCPMonkey provides a Firefox extension that enables AI agents to interact with your browser, 
+        with powerful tab management and page content access capabilities.
       </>
     ),
   },
   {
-    title: 'Focus on What Matters',
+    title: 'MCP Server',
     Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        Connect AI tools like Claude and Cursor to your browser using the 
+        standardized Model Context Protocol (MCP) interface.
       </>
     ),
   },
   {
-    title: 'Powered by React',
+    title: 'Advanced AI Capabilities',
     Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        Extract page styles, manage tabs programmatically, and analyze web content
+        to help your AI assistants better understand and interact with the web.
       </>
     ),
   },

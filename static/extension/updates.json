@@ -1,0 +1,12 @@
+{
+    "addons": {
+        "{3292460b-e420-4c96-a8fd-a7cccf0efa5e}": {
+        "updates": [
+            {
+                "version": "0.4.0",
+                "update_link": "https://github.com/kstrikis/MCPMonkey/releases/download/v0.4.0/MCPMonkey-0.4.0.xpi"
+            }
+        ]
+        }
+    }
+}
