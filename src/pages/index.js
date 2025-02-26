@@ -53,6 +53,16 @@ function MainContent() {
                 and browser interactions.
               </p>
               
+              <div className={styles.quickStart}>
+                <Heading as="h3">Quick Start</Heading>
+                <ol>
+                  <li>Add <code>npx mcpmonkey-server</code> to Cursor (Settings > Features > MCP Servers)</li>
+                  <li>Install <a href="https://github.com/kstrikis/MCPMonkey/releases/download/v0.4.0/MCPMonkey-0.4.0.xpi">the Firefox browser extension</a></li>
+                  <li>Click <a href="https://github.com/kstrikis/MCPMonkey/releases/download/v0.4.0/getPageStyles.user.js">here</a> to install the page style extractor userscript</li>
+                </ol>
+                <p><strong>Try it:</strong> Browse to a website and ask Cursor: "get the page styles and apply it to my project"</p>
+              </div>
+              
               <Heading as="h2">Key Features</Heading>
               <ul>
                 <li>
@@ -72,26 +82,14 @@ function MainContent() {
                 </li>
               </ul>
               
-              <Heading as="h2">Getting Started</Heading>
+              <Heading as="h2">Coming Soon</Heading>
               <p>
-                To start using MCPMonkey, follow our{' '}
-                <Link to="/docs/intro">installation guide</Link> or check out the{' '}
-                <Link href="https://github.com/kstrikis/mcpmonkey">GitHub repository</Link>.
+                One of our most exciting planned features is <strong>Custom MCP Scripts</strong>. These special 
+                <code>.mcp.js</code> files will let you create website-specific tools that AI assistants can use to 
+                interact directly with web applications. Imagine giving your AI assistant custom abilities for your 
+                favorite websites - from filling forms to extracting data or navigating complex interfaces!
               </p>
               
-              <div className={styles.callToAction}>
-                <Link
-                  className="button button--primary button--lg"
-                  to="/docs/intro">
-                  Read the Documentation
-                </Link>
-                <Link
-                  className="button button--primary button--lg"
-                  href="https://github.com/kstrikis/mcpmonkey"
-                  style={{marginLeft: '12px'}}>
-                  View Source
-                </Link>
-              </div>
             </div>
           </div>
         </div>

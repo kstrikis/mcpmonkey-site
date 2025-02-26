@@ -2,21 +2,51 @@
 sidebar_position: 3
 ---
 
-# MCP Servers
+# Custom MCP Scripts
 
-MCP (Model Context Protocol) servers are a core component of the MCPMonkey architecture. They act as a bridge between AI language models and your browser.
+Model Context Protocol (MCP) is a standardized way for AI assistants to access tools and resources. MCPMonkey extends this capability, allowing you to create custom MCP scripts that can interact with websites directly.
 
 ## What is an MCP Server?
 
-An MCP server is a standardized interface that allows AI models to access real-world tools and information. For MCPMonkey, the MCP server specifically provides browser access capabilities to AI tools like Claude or OpenAI models.
+An MCP server is a standardized interface that allows AI models to access real-world tools and information. It provides three main components:
+
+1. **Tools**: Functions that AI can call to perform actions
+2. **Resources**: Data sources the AI can access
+3. **Prompts**: Special instructions prefixed with @MCP that configure how the AI operates
+
+For MCPMonkey, the MCP server specifically provides browser access capabilities to AI tools like Claude or Cursor's AI assistant.
 
 The server runs locally on your machine and communicates with both:
 1. The AI tool (via stdio transport)
 2. The MCPMonkey browser extension (via internal WebSocket connection)
 
+## Custom MCP Scripts (.mcp.js)
+
+MCPMonkey's long-term plan is to allow you to extend its capabilities through custom `.mcp.js` files. These files would let you:
+
+- Define additional tools with custom schemas
+- Inject JavaScript code into matching websites
+- Create website-specific tools that can interact with page elements
+- Provide AI agents with predefined tooling for specific websites
+
+### How Custom MCP Scripts Work
+
+1. **Tool Definition**: Each `.mcp.js` file defines tools with names, descriptions, and parameter schemas (just like standard MCP tools)
+2. **Website Matching**: Scripts specify which websites they should run on (similar to userscripts)
+3. **Code Injection**: When you visit a matching website, the custom JavaScript is injected
+4. **Tool Implementation**: The script provides the actual JavaScript implementation for the tool
+5. **AI Access**: AI assistants can then use these tools to interact with the website
+
+### Example Uses
+
+- Create a tool that can fill out forms on specific websites
+- Add a tool that can extract structured data from a particular web application
+- Provide a navigation tool optimized for a specific web service
+- Enable AI assistants to interact with web-based editors or tools
+
 ## MCPMonkey Architecture
 
-MCPMonkey consists of two main components that work together:
+MCPMonkey consists of these main components that work together:
 
 1. **MCP Server**:
    - Communicates with AI tools using stdio transport
@@ -28,12 +58,18 @@ MCPMonkey consists of two main components that work together:
    - Firefox extension that interacts with your browser
    - Communicates with the MCP server via internal WebSocket connection (port 3025)
    - Executes browser operations requested by the server
+   - Loads and manages custom MCP scripts
 
-The browser extension and MCP server communicate via a WebSocket connection, but this is purely internal. External AI tools connect to the MCP server only through stdio transport.
+3. **Custom MCP Scripts** (`.mcp.js` files):
+   - Define additional tools and capabilities
+   - Inject code into matching websites
+   - Provide website-specific functionality to AI tools
 
-## Available MCP Tools
+The components communicate securely, allowing AI tools to interact with both the browser and specific websites in a controlled manner.
 
-The MCPMonkey server provides the following tools to AI models:
+## Built-in MCP Tools
+
+The MCPMonkey server provides these built-in tools to AI models:
 
 ### browserAction Tool
 
@@ -54,38 +90,65 @@ This tool extracts styling information from web pages:
 - Assists AI in understanding web page design
 - Uses content script bridge for secure communication
 
-
-
 Note: In Cursor 0.46+, MCP settings are in their own tab and there is support for .cursor/mcp.json configuration files.
 
-## Custom MCP Tools (Not yet supported)
+## Creating Custom MCP Scripts (Not yet supported)
 
-You can also develop custom MCP servers that extend MCPMonkey's capabilities. Custom servers can be installed and managed through the MCPMonkey dashboard.
+To create a custom MCP script for MCPMonkey:
 
-### Benefits of Custom Servers
+1. Create a `.mcp.js` file with your tool definitions and implementations
+2. Define the websites the script should match (using patterns)
+3. Implement the JavaScript functions that will handle tool invocations
+4. Install the script through the MCPMonkey dashboard (coming soon)
 
-- Add specialized functionality for specific use cases
-- Implement custom security policies
-- Integrate with other tools and services
-- Provide domain-specific capabilities to AI models
+### Sample Script Structure
 
-### Developing Custom Servers (Not yet implemented)
+```javascript
+// ==MCP==
+// @name           Example Website Helper
+// @match          https://example.com/*
+// @description    Tools for interacting with Example.com
+// ==/MCP==
 
-To develop a custom MCP tool for MCPMonkey: (Not yet supported)
+// Define your MCP tool
+const exampleTool = {
+  name: "exampleWebsiteTool",
+  description: "Interact with example.com",
+  parameters: {
+    action: {
+      type: "string",
+      enum: ["search", "navigate", "extract"],
+      description: "The action to perform"
+    },
+    query: {
+      type: "string",
+      description: "The search query or navigation target"
+    }
+  },
+  
+  // Implement the actual tool functionality
+  execute: async function(params) {
+    if (params.action === "search") {
+      const searchBox = document.querySelector('#search-input');
+      searchBox.value = params.query;
+      document.querySelector('#search-button').click();
+      return { success: true, message: "Search performed" };
+    }
+    // Additional actions...
+  }
+};
 
-1. Use the MCPMonkey Server SDK
-2. Define your server's permissions and capabilities
-3. Implement your custom tools following the MCP specification
-4. Package your server as a .mcp.js file
-5. Publish to our community hub
+// Register the tool with MCPMonkey
+registerMCPTool(exampleTool);
+```
 
 ## Security Considerations
 
-When using MCP servers, be aware of the following security considerations:
+When using custom MCP scripts, be aware of the following security considerations:
 
-- Servers run locally on your machine and can access browser data
-- Each server should be granted only the permissions it requires
-- Review server code or use trusted sources before installation
-- MCPMonkey provides granular permission controls for each server
+- Scripts can access and modify web page content
+- Each script should be granted only the permissions it requires
+- Review script code or use trusted sources before installation
+- MCPMonkey provides granular permission controls for each script
 
 For more information, see the [Security](/docs/security) documentation. 
